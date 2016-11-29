@@ -15,6 +15,54 @@ AqM = 1/Iyy
 ArL = Ixz/den
 ArN = Ixx/den
 
+
+function xdot=func(t,x)
+    X=0;
+    Y=0;
+    Z=0;
+    L=0;
+    M=0;
+    N=0;
+    
+    xdot(1)= - x(5)*x(3) + x(6)*x(2) - g*sin(x(8)) + X/mass
+    xdot(2)= - x(6)*x(1) + x(4)*x(3) + g*cos(x(8))*sin(x(7)) + Y/mass
+    xdot(3)= - x(4)*x(2) + x(5)*x(1) + g*cos(x(8))*cos(x(7)) + Z/mass
+    
+    pdotnum= Ixz*(Ixx+Izz-Iyy)*x(4)*x(5) + (-Iyy*Izz-Ixz*Izz-Ixx*Izz)*x(5)*x(6) + Izz*L + Ixz*N
+    pdotden= Ixz^2 - Ixx*Izz
+    xdot(4)= - pdotnum / pdotden
+    xdot(5)= (-(Ixx-Izz)*x(6)*x(4) - Ixz*(x(4)^2 + x(6)^2) + M)/Iyy
+    rdotnum=
+    rdotden=
+    xdot(6)=
+    
+    xdot(7)=
+    xdot(8)=
+    xdot(9)=
+    xdot(10)=
+    xdot(11)=
+    xdot(12)=
+endfunction
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 K1 = 4.321*g
 K2 = 3.426*g
 K3 = 3.422*g

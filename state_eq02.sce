@@ -44,44 +44,35 @@ B62 =  ArL*l*K2 + ArN*KT2
 B63 = -ArN*KT3
 B64 = -ArN*KT4
 
-A=[ 0 0 0 0 0 0 0 -g 0;
-    0 0 0 0 0 0 g  0 0;
-    0 0 0 0 0 0 0  0 0;
-    0 0 0 0 0 0 0  0 0;
-    0 0 0 0 0 0 0  0 0;
-    0 0 0 0 0 0 0  0 0;
-    0 0 0 1 0 0 0  0 0;
-    0 0 0 0 1 0 0  0 0;
-    0 0 0 0 0 1 0  0 0 ]
+A=[ 0 0 0 0 0 0 ;
+    0 0 0 0 0 0 ;
+    0 0 0 0 0 0 ;
+    1 0 0 0 0 0 ;
+    0 1 0 0 0 0 ;
+    0 0 1 0 0 0 ]
     
-B=[ 0 0 0 0;
-    0 0 0 0;
-    B31 B32 B33 B34;
-    B41 B42 B43 B44;
+B=[ B41 B42 B43 B44;
     0   0   B53 B54;
     B61 B62 B63 B64;
     0 0 0 0;
     0 0 0 0;
     0 0 0 0 ]
     
-C = eye(9,9)
+Csim = eye(6,6)
+C=[ 1 0 0 0 0 0;
+    0 1 0 0 0 0;
+    0 0 1 0 0 0]
 
-//C=[ 1 0 0 1 0 0 0 0 0;
-//    0 1 0 0 1 0 0 0 0;
-//    0 0 1 0 0 1 0 0 0;
-//    0 0 0 0 0 0 1 0 0;
-//    0 0 0 0 0 0 0 1 0;
-//    0 0 0 0 0 0 0 0 1]
+D = zeros(6,4)
 
-D = zeros(9,4)
-
-Q=diag([1,1,1,1,1,1,100,100,1]);R=diag([1,1,1,1]);     //Usual notations x'Qx + u'Ru
+// Contoroller Desigen
+Q=diag([1,1,1,100,100,100]);R=diag([1,1,1,1]);     //Usual notations x'Qx + u'Ru
 Big=sysdiag(Q,R);    //Now we calculate C1 and D12
-[w,wp]=fullrf(Big);C1=wp(:,1:9);D12=wp(:,10:$);   //[C1,D12]'*[C1,D12]=Big
+[w,wp]=fullrf(Big);C1=wp(:,1:6);D12=wp(:,7:$);   //[C1,D12]'*[C1,D12]=Big
 P=syslin('c',A,B,C1,D12);    //The plant (continuous-time)
 [K,X]=lqr(P)
 disp(spec(A+B*K))    //check stability
 disp(norm(A'*X+X*A-X*B*inv(R)*B'*X+Q,1))  //Riccati check
 
 
-L=ppol(A',C',[-1 -1 -1 -1 -1 -1 -1 -1 -1])
+L=ppol(A',C',[-1 -1 -1 -1 -1 -1 ])
