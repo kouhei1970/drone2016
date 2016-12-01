@@ -32,15 +32,21 @@ function xdot=func(t,x)
     pdotden= Ixz^2 - Ixx*Izz
     xdot(4)= - pdotnum / pdotden
     xdot(5)= (-(Ixx-Izz)*x(6)*x(4) - Ixz*(x(4)^2 + x(6)^2) + M)/Iyy
-    rdotnum=
-    rdotden=
-    xdot(6)=
+    rdotnum= (-Ixx*Iyy+Ixz^2 + Ixx^2)*x(4)*x(5) + (-Ixx*Izz + Ixz*Iyy - Ixx*Ixz)*x(5)*x(6) + Ixz*L + Ixx* N
+    rdotden= Ixz^2 - Ixx*Izz
+    xdot(6)= - rdotnum / rdotden
     
-    xdot(7)=
-    xdot(8)=
-    xdot(9)=
-    xdot(10)=
-    xdot(11)=
+    xdot(7)= x(4) + x(5)*sin(x(7))*tan(x(8)) + x(6)*cos(x(7))*tan(x(8))
+    xdot(8)= x(5)*cos(x(7)) - x(6)*sin(x(7))
+    xdot(9)= x(5)*sin(x(7))/cos(x(8)) + x(6)*cos(x(7))/cos(x(8)) 
+    xdot(10)= x(1)*cos(x(8))*cos(x(7)) 
+            + x(2)*(sin(x(7))*sin(x(8))*cos(x(7)) - cos(x()7))*sin(x(9))
+            + x(3)*(cos(x(7))*sin(x(8))*cos(x(9)) + sin(x(7))*sin(x(9)))
+    xdot(11)= x(1)*cos()*sin()
+            + x(2)*()
+            + x(3)*()
+    
+    
     xdot(12)=
 endfunction
 
